@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" type="text/css" href="../../bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../bootstrap/bootstrap-icons.css" />
+    <link rel="stylesheet" type="text/css" href="../../bootstrap/bootstrap-select.min.css" />
+    <link rel="stylesheet" type="text/css" href="./main.css" />
+    <title>Regulations</title>
+</head>
+<body onload="init()">
+
+<script src="../../bootstrap/jquery-3.5.1.slim.min.js"></script>
+<script src="../../bootstrap/bootstrap.bundle.min.js"></script>
+<script defer src="../../bootstrap/bootstrap-select.min.js"></script>
+
+<main>
+    <div class="row m-0 pt-3">
+        <div class="col-2">
+            <button id="back-btn" type="button" class="btn btn-outline-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                  </svg>
+            </button>
+        </div>
+    </div>
+    <div class="row m-0 pt-3">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="professors-tab" data-bs-toggle="tab" data-bs-target="#professors" type="button" role="tab" aria-controls="professors" aria-selected="true">Викладачі</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="subjects-tab" data-bs-toggle="tab" data-bs-target="#subjects" type="button" role="tab" aria-controls="subjects" aria-selected="false">Предмети</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="professors" role="tabpanel" aria-labelledby="professors-tab">
+                <table class="table">
+                    <thead class="table-light">
+                        <tr>
+                            <th colspan="5" class="text-end">
+                                <button id="add-prof-btn" type="button" class="btn btn-primary">Додати нового викладача</button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Викладач</th>
+                            <th scope="col">ПІБ</th>
+                            <th scope="col">Посада</th>
+                            <th scope="col">Предмети</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Книш Л. І.</td>
+                            <td>Книш Людмила Іванівна</td>
+                            <td>
+                                <select class="selectpicker" data-live-search="true">
+                                    <option>N/A</option>
+                                    <option>Mustard</option>
+                                    <option>Ketchup</option>
+                                    <option>Barbecue</option>
+                                </select>
+                            </td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <div class="tab-pane fade" id="subjects" role="tabpanel" aria-labelledby="subjects-tab">
+                Предмети
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                ...
+            </div>
+        </div>
+    </div>
+</main>
+<script src="./main.js"></script>
+</body>
+</html>
