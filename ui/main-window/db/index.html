@@ -26,59 +26,92 @@
             </button>
         </div>
     </div>
-    <div class="row m-0 pt-3">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="professors-tab" data-bs-toggle="tab" data-bs-target="#professors" type="button" role="tab" aria-controls="professors" aria-selected="true">Викладачі</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="subjects-tab" data-bs-toggle="tab" data-bs-target="#subjects" type="button" role="tab" aria-controls="subjects" aria-selected="false">Предмети</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="professors" role="tabpanel" aria-labelledby="professors-tab">
-                <table class="table">
-                    <thead class="table-light">
-                        <tr>
-                            <th colspan="5" class="text-end">
-                                <button id="add-prof-btn" type="button" class="btn btn-primary">Додати нового викладача</button>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Викладач</th>
-                            <th scope="col">ПІБ</th>
-                            <th scope="col">Посада</th>
-                            <th scope="col">Предмети</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Книш Л. І.</td>
-                            <td>Книш Людмила Іванівна</td>
-                            <td>
-                                <select class="selectpicker" data-live-search="true">
-                                    <option>N/A</option>
-                                    <option>Mustard</option>
-                                    <option>Ketchup</option>
-                                    <option>Barbecue</option>
-                                </select>
-                            </td>
-                            <td>5</td>
-                        </tr>
-                    </tbody>
-                  </table>
-            </div>
-            <div class="tab-pane fade" id="subjects" role="tabpanel" aria-labelledby="subjects-tab">
-                Предмети
-            </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                ...
-            </div>
+    <div class="row m-0 pt-4">
+        <div class="tab-container">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <a class="nav-link active" id="nav-professor-tab" data-toggle="tab" href="#nav-professor" role="tab" aria-controls="nav-professor" aria-selected="true">Викладачі</a>
+                  <a class="nav-link" id="nav-subject-tab" data-toggle="tab" href="#nav-subject" role="tab" aria-controls="nav-subject" aria-selected="false">Предмети</a>
+                  <a class="nav-link" id="nav-degree-tab" data-toggle="tab" href="#nav-degree" role="tab" aria-controls="nav-degree" aria-selected="false">Посади</a>
+                </div>
+              </nav>
+              <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-professor" role="tabpanel" aria-labelledby="nav-professor-tab">
+                    <div class="table-container">
+                        <table class="table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th colspan="5" class="text-end">
+                                        <button id="add-prof-btn" type="button" class="btn btn-primary">Додати нового викладача</button>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Викладач</th>
+                                    <th scope="col">ПІБ</th>
+                                    <th scope="col">Посада</th>
+                                    <th scope="col">Предмети</th>
+                                </tr>
+                            </thead>
+                            <tbody id="proffesor-table-body" class="table-body-scroll-area">
+                                <tr>
+                                    <td>1</td>
+                                    <td>Книш Л. І.</td>
+                                    <td>Книш Людмила Іванівна</td>
+                                    <td>
+                                        <select class="selectpicker" data-live-search="true">
+                                            <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+                                            <option data-tokens="mustard">Burger, Shake and a Smile</option>
+                                            <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+                                          </select>
+                                          
+                                    </td>
+                                    <td>5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-subject" role="tabpanel" aria-labelledby="nav-subject-tab">
+                    <div class="table-container">
+                        <div class="table-header">
+                            <div class="table-grid">
+                                <div class="table-row">
+                                    <div class="row p-2">
+                                        <div class="col-12 text-right">
+                                            <button id="add-prof-btn" type="button" class="btn btn-primary">Додати нового викладача</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="row">
+                                        <div class="col-1 h4 text-center lh">#</div>
+                                        <div class="col-2 h4 text-center lh">Викладач</div>
+                                        <div class="col-3 h4 text-center lh">ПІБ</div>
+                                        <div class="col-2 h4 text-center lh">Посада</div>
+                                        <div class="col-3 h4 text-center lh">Предмети</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-body">
+                            <div class="table-grid">
+                                <div class="table-row">
+                                    <div class="row">
+                                        <div class="col-1 text-center lh">1</div>
+                                        <div class="col-2 text-center lh">Викладач</div>
+                                        <div class="col-3 text-center lh">ПІБ</div>
+                                        <div class="col-2 text-center lh">Посада</div>
+                                        <div class="col-3 text-center lh">Предмети</div>
+                                        <div class="col-1 text-center lh">X</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-degree" role="tabpanel" aria-labelledby="nav-degree-tab">...</div>
+              </div>
         </div>
     </div>
 </main>
