@@ -11,11 +11,6 @@
     <title>Regulations</title>
 </head>
 <body onload="init()">
-
-<script src="../../bootstrap/jquery-3.5.1.slim.min.js"></script>
-<script src="../../bootstrap/bootstrap.bundle.min.js"></script>
-<script defer src="../../bootstrap/bootstrap-select.min.js"></script>
-
 <main>
     <div class="row m-0 pt-3">
         <div class="col-2">
@@ -38,45 +33,9 @@
               <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-professor" role="tabpanel" aria-labelledby="nav-professor-tab">
                     <div class="table-container">
-                        <table class="table">
-                            <thead class="table-light">
-                                <tr>
-                                    <th colspan="5" class="text-end">
-                                        <button id="add-prof-btn" type="button" class="btn btn-primary">Додати нового викладача</button>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Викладач</th>
-                                    <th scope="col">ПІБ</th>
-                                    <th scope="col">Посада</th>
-                                    <th scope="col">Предмети</th>
-                                </tr>
-                            </thead>
-                            <tbody id="proffesor-table-body" class="table-body-scroll-area">
-                                <tr>
-                                    <td>1</td>
-                                    <td>Книш Л. І.</td>
-                                    <td>Книш Людмила Іванівна</td>
-                                    <td>
-                                        <select class="selectpicker" data-live-search="true">
-                                            <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
-                                            <option data-tokens="mustard">Burger, Shake and a Smile</option>
-                                            <option data-tokens="frosting">Sugar, Spice and all things nice</option>
-                                          </select>
-                                          
-                                    </td>
-                                    <td>5</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="nav-subject" role="tabpanel" aria-labelledby="nav-subject-tab">
-                    <div class="table-container">
                         <div class="table-header">
                             <div class="table-grid">
-                                <div class="table-row">
+                                <div class="table-row" style="border: none;">
                                     <div class="row p-2">
                                         <div class="col-12 text-right">
                                             <button id="add-prof-btn" type="button" class="btn btn-primary">Додати нового викладача</button>
@@ -95,26 +54,68 @@
                             </div>
                         </div>
                         <div class="table-body">
+                            <div id="professor-table-body" class="table-grid"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-subject" role="tabpanel" aria-labelledby="nav-subject-tab">
+                    <div class="table-container">
+                        <div class="table-header">
                             <div class="table-grid">
+                                <div class="table-row" style="border: none;">
+                                    <div class="row p-2">
+                                        <div class="col-12 text-right">
+                                            <button id="add-sub-btn" type="button" class="btn btn-primary">Додати предмет</button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="table-row">
                                     <div class="row">
-                                        <div class="col-1 text-center lh">1</div>
-                                        <div class="col-2 text-center lh">Викладач</div>
-                                        <div class="col-3 text-center lh">ПІБ</div>
-                                        <div class="col-2 text-center lh">Посада</div>
-                                        <div class="col-3 text-center lh">Предмети</div>
-                                        <div class="col-1 text-center lh">X</div>
+                                        <div class="col-1 h4 text-center lh">#</div>
+                                        <div class="col-10 h4 text-left pl-5 lh">Назва</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="table-body">
+                            <div id="subject-table-body" class="table-grid"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="nav-degree" role="tabpanel" aria-labelledby="nav-degree-tab">...</div>
+                <div class="tab-pane fade" id="nav-degree" role="tabpanel" aria-labelledby="nav-degree-tab">
+                    <div class="table-container">
+                        <div class="table-header">
+                            <div class="table-grid">
+                                <div class="table-row" style="border: none;">
+                                    <div class="row p-2">
+                                        <div class="col-12 text-right">
+                                            <button id="add-degree-btn" type="button" class="btn btn-primary">Додати наукову ступінь (посаду)</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="row">
+                                        <div class="col-1 h4 text-center lh">#</div>
+                                        <div class="col-5 h4 text-left pl-5 lh">Назва</div>
+                                        <div class="col-5 h4 text-left pl-5 lh">Скорочення</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-body">
+                            <div id="degree-table-body" class="table-grid"></div>
+                        </div>
+                    </div>
+                </div>
               </div>
         </div>
     </div>
 </main>
+
 <script src="./main.js"></script>
+
+<script src="../../bootstrap/jquery-3.5.1.slim.min.js"></script>
+<script src="../../bootstrap/bootstrap.bundle.min.js"></script>
+<script defer src="../../bootstrap/bootstrap-select.min.js"></script>
 </body>
 </html>

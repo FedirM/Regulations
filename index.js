@@ -6,6 +6,9 @@ const {
 
 const path = require('path');
 
+// Custom modules
+const db = require('./modules/db/.');
+
 let mainWin, modalWin;
 
 function createWindow() {
@@ -35,6 +38,10 @@ app.on('ready', createWindow);
 // IPC
 ipcMain.on('main-window:open-db', (event, args) => {
     mainWin.loadFile('./ui/main-window/db/index.html');
+});
+
+ipcMain.on('main-window:init-db', (event, args) => {    
+    mainWin.webContents.send('main-window:on-db-init', db.getData());
 });
 
 ipcMain.on('main-window:open-reg', (event, args) => {

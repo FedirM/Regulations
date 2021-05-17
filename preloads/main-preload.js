@@ -10,7 +10,8 @@ contextBridge.exposeInMainWorld(
             let validChannels = [
                 'main-window:open-db',
                 'main-window:open-reg',
-                'main-window:open-home'
+                'main-window:open-home',
+                'main-window:init-db'
             ];
             if (validChannels.includes(channel)) {
                 ipcRenderer.send(channel, data);
@@ -21,7 +22,7 @@ contextBridge.exposeInMainWorld(
         on (channel, func) {
             // whitelist channels
             let validChannels = [
-                ''
+                'main-window:on-db-init'
             ];
             if (validChannels.includes(channel)) {
                 // Deliberately strip event as it includes `sender`
