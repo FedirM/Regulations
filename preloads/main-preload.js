@@ -11,7 +11,8 @@ contextBridge.exposeInMainWorld(
                 'main-window:open-db',
                 'main-window:open-reg',
                 'main-window:open-home',
-                'main-window:init-db'
+                'main-window:init-db',
+                'main-window:db-save-changes'
             ];
             if (validChannels.includes(channel)) {
                 ipcRenderer.send(channel, data);

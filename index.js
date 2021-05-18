@@ -51,3 +51,7 @@ ipcMain.on('main-window:open-reg', (event, args) => {
 ipcMain.on('main-window:open-home', (event, args) => {
     mainWin.loadFile('./ui/main-window/home/index.html');
 });
+
+ipcMain.on('main-window:db-save-changes', (event, args) => {
+    db.setData(args);
+})
