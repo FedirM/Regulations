@@ -33,6 +33,27 @@ function createWindow() {
     mainWin.webContents.openDevTools();
 }
 
+function createModalAddDegree() {
+    modalWin = new BrowserWindow({
+        width: 600,
+        height: 200,
+        parent: mainWin,
+        modal: true,
+        frame: true,
+        darkTheme: true,
+        webPreferences: {
+            nodeIntegration: false,
+            contextIsolation: true,
+            enableRemoteModule: false,
+            preload: path.join(__dirname, '/preloads/modal-add-degree-preload.js')
+        }
+    });
+
+    modalWin.loadFile('./ui/modal-window/add-degree/index.html');
+    modalWin.setMenuBarVisibility(false);
+    modalWin.webContents.openDevTools();
+}
+
 app.on('ready', createWindow);
 
 // IPC
@@ -55,3 +76,7 @@ ipcMain.on('main-window:open-home', (event, args) => {
 ipcMain.on('main-window:db-save-changes', (event, args) => {
     db.setData(args);
 })
+
+ipcMain.on('main-window:open-modal-add-degree', (event, args) => {
+    createModalAddDegree();
+});

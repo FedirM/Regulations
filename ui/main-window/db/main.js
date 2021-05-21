@@ -16,6 +16,8 @@ function init() {
         el.addEventListener('click', navTabClick);
     }
 
+    document.getElementById('add-degree-btn').addEventListener('click', onAddNewDegree);
+
     window.ipc.send('main-window:init-db');
 }
 
@@ -25,7 +27,7 @@ function onIpcInit() {
     initDegreeTable();
 }
 
-function showSnackbar( message, isError = false ) {
+function showStatusSnackbar( message, isError = false ) {
     Snackbar.show({
         text: message,
         textColor: (isError) ? 'rgb(255, 123, 123)' : '#ffffff',
@@ -179,6 +181,10 @@ function onSubDelete(event) {
 
 function onDegreeDelete(event) {
     console.log('Delete id: ', event.target.id);
+}
+
+function onAddNewDegree(event) {
+    window.ipc.send('main-window:open-modal-add-degree');
 }
 
 // IPC

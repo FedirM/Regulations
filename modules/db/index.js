@@ -9,9 +9,14 @@ function getData() {
 }
 
 function setData( tmp ) {
-    fs.writeFileSync('./data_old.json', JSON.stringify(data, '\n', 2));
-    fs.writeFileSync('./data.json', JSON.stringify(tmp, '\n', 2));
-    data = JSON.stringify(JSON.parse(tmp));
+    try {
+        fs.writeFileSync('./data_old.json', JSON.stringify(data, '\n', 2));
+        fs.writeFileSync('./data.json', JSON.stringify(tmp, '\n', 2));
+        data = JSON.stringify(JSON.parse(tmp));
+        return true;
+    } catch(e) {
+        throw e.message;
+    }
 }
 
 
