@@ -8,11 +8,11 @@ function onFormSubmit(event) {
     event.preventDefault();
     const data = {
         fullName: document.getElementById('fullName').value,
-        name: document.getElementById('name').value
+        shortName: document.getElementById('shortName').value
     }
-    console.log('DATA: ', data);
+    window.ipc.send('modal-window:confirm', data);
 }
 
 function onCancelForm(event) {
-    console.log('Cancel form');
+    window.ipc.send('modal-window:cancel');
 }

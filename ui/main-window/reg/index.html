@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="stylesheet" type="text/css" href="../../../assets/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../assets/bootstrap/bootstrap-icons.css" />
+    <link rel="stylesheet" type="text/css" href="../../../assets/bootstrap/stepper/bs-stepper.min.css" />
     <link rel="stylesheet" type="text/css" href="./main.css" />
     <title>Regulations</title>
 </head>
@@ -13,18 +14,60 @@
 <main>
     <div class="row m-0">
         <div class="col-2 mt-2">
-            <button id="back-btn" type="button" class="btn btn-outline-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                  </svg>
-            </button>
+            <button id="back-btn" type="button" class="btn btn-outline-primary bi bi-arrow-left"></button>
         </div>
     </div>
+    <div class="bs-stepper" id="bs-stepper">
+        <div class="bs-stepper-header" role="tablist">
+          <div class="step" data-target="#init">
+            <button type="button" class="step-trigger" role="tab" aria-controls="init" id="step-1">
+              <span class="bs-stepper-circle">1</span>
+              <span class="bs-stepper-label">Subjects</span>
+            </button>
+          </div>
+          <div class="line"></div>
+          <div class="step" data-target="#uploads">
+            <button type="button" class="step-trigger" role="tab" aria-controls="uploads" id="step-2">
+              <span class="bs-stepper-circle">2</span>
+              <span class="bs-stepper-label">Uploads</span>
+            </button>
+          </div>
+          <div class="line"></div>
+          <div class="step" data-target="#temporary">
+            <button type="button" class="step-trigger" role="tab" aria-controls="temporary" id="step-3">
+              <span class="bs-stepper-circle">3</span>
+              <span class="bs-stepper-label">Temporary</span>
+            </button>
+          </div>
+          <div class="line"></div>
+          <div class="step" data-target="#edit">
+            <button type="button" class="step-trigger" role="tab" aria-controls="edit" id="step-4">
+              <span class="bs-stepper-circle">4</span>
+              <span class="bs-stepper-label">Edit</span>
+            </button>
+          </div>
+          <div class="line"></div>
+          <div class="step" data-target="#finish">
+            <button type="button" class="step-trigger" role="tab" aria-controls="finish" id="step-5">
+              <span class="bs-stepper-circle">5</span>
+              <span class="bs-stepper-label">Finish</span>
+            </button>
+          </div>
+        </div>
+        <div class="bs-stepper-content">
+          <div id="init" class="content" role="tabpanel" aria-labelledby="step-1"></div>
+          <div id="uploads" class="content" role="tabpanel" aria-labelledby="step-2"></div>
+          <div id="temporary" class="content" role="tabpanel" aria-labelledby="step-3"></div>
+          <div id="edit" class="content" role="tabpanel" aria-labelledby="step-4"></div>
+          <div id="finish" class="content" role="tabpanel" aria-labelledby="step-5"></div>
+        </div>
+      </div>
 </main>
 
 <script src="./main.js"></script>
 
 <script src="../../../assets/bootstrap/jquery-3.5.1.slim.min.js"></script>
 <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="../../../assets/bootstrap/stepper/bs-stepper.min.js"></script>
 </body>
 </html>

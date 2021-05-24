@@ -39,7 +39,7 @@ function createModalAddDegree() {
         height: 200,
         parent: mainWin,
         modal: true,
-        frame: true,
+        frame: false,
         darkTheme: true,
         webPreferences: {
             nodeIntegration: false,
@@ -51,7 +51,7 @@ function createModalAddDegree() {
 
     modalWin.loadFile('./ui/modal-window/add-degree/index.html');
     modalWin.setMenuBarVisibility(false);
-    modalWin.webContents.openDevTools();
+    modalWin.setResizable(false);
 }
 
 app.on('ready', createWindow);
@@ -79,4 +79,13 @@ ipcMain.on('main-window:db-save-changes', (event, args) => {
 
 ipcMain.on('main-window:open-modal-add-degree', (event, args) => {
     createModalAddDegree();
+});
+
+ipcMain.on('modal-window:confirm', (event, args) => {
+    console.log('SAVE: ', args);
+    modalWin.close();
+});
+
+ipcMain.on('modal-window:cancel', (event, args) => {
+    modalWin.close();
 });

@@ -7,7 +7,10 @@ contextBridge.exposeInMainWorld(
     "ipc", {
         send (channel, data) {
             // whitelist channels
-            let validChannels = [];
+            let validChannels = [
+                'modal-window:confirm',
+                'modal-window:cancel'
+            ];
             if (validChannels.includes(channel)) {
                 ipcRenderer.send(channel, data);
             } else {
