@@ -7,61 +7,136 @@
     <link rel="stylesheet" type="text/css" href="../../../assets/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../assets/bootstrap/bootstrap-icons.css" />
     <link rel="stylesheet" type="text/css" href="../../../assets/bootstrap/stepper/bs-stepper.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../assets/bootstrap/bootstrap-select.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../assets/snackbar/snackbar.min.css" />
     <link rel="stylesheet" type="text/css" href="./main.css" />
     <title>Regulations</title>
 </head>
 <body>
 <main>
-    <div class="row m-0">
-        <div class="col-2 mt-2">
-            <button id="back-btn" type="button" class="btn btn-outline-primary bi bi-arrow-left"></button>
-        </div>
+  <div id="loader" class="spinner-disabled" onclick="(event) => { event.stopPropagation(); }">
+    <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+      <div class="spinner-grow text-success spinner-size" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="row text-center mt-5">
+        <h3>Файли оброблюються</h3>
+      </div>
     </div>
-    <div class="bs-stepper" id="bs-stepper">
-        <div class="bs-stepper-header" role="tablist">
-          <div class="step" data-target="#init">
-            <button type="button" class="step-trigger" role="tab" aria-controls="init" id="step-1">
-              <span class="bs-stepper-circle">1</span>
-              <span class="bs-stepper-label">Subjects</span>
-            </button>
-          </div>
-          <div class="line"></div>
-          <div class="step" data-target="#uploads">
-            <button type="button" class="step-trigger" role="tab" aria-controls="uploads" id="step-2">
-              <span class="bs-stepper-circle">2</span>
-              <span class="bs-stepper-label">Uploads</span>
-            </button>
-          </div>
-          <div class="line"></div>
-          <div class="step" data-target="#temporary">
-            <button type="button" class="step-trigger" role="tab" aria-controls="temporary" id="step-3">
-              <span class="bs-stepper-circle">3</span>
-              <span class="bs-stepper-label">Temporary</span>
-            </button>
-          </div>
-          <div class="line"></div>
-          <div class="step" data-target="#edit">
-            <button type="button" class="step-trigger" role="tab" aria-controls="edit" id="step-4">
-              <span class="bs-stepper-circle">4</span>
-              <span class="bs-stepper-label">Edit</span>
-            </button>
-          </div>
-          <div class="line"></div>
-          <div class="step" data-target="#finish">
-            <button type="button" class="step-trigger" role="tab" aria-controls="finish" id="step-5">
-              <span class="bs-stepper-circle">5</span>
-              <span class="bs-stepper-label">Finish</span>
-            </button>
+  </div>
+  <div class="row m-0">
+      <div class="col-2 mt-2">
+          <button id="back-btn" type="button" class="btn btn-outline-primary bi bi-arrow-left"></button>
+      </div>
+  </div>
+  <div class="bs-stepper" id="bs-stepper">
+    <div class="bs-stepper-header" role="tablist">
+      <div class="step" data-target="#init">
+        <button type="button" class="step-trigger" role="tab" aria-controls="init" id="step-1">
+          <span class="bs-stepper-circle">1</span>
+          <span class="bs-stepper-label">Subjects</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#uploads">
+        <button type="button" class="step-trigger" role="tab" aria-controls="uploads" id="step-2">
+          <span class="bs-stepper-circle">2</span>
+          <span class="bs-stepper-label">Uploads</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#edit">
+        <button type="button" class="step-trigger" role="tab" aria-controls="edit" id="step-3">
+          <span class="bs-stepper-circle">3</span>
+          <span class="bs-stepper-label">Edit</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#finish">
+        <button type="button" class="step-trigger" role="tab" aria-controls="finish" id="step-4">
+          <span class="bs-stepper-circle">4</span>
+          <span class="bs-stepper-label">Finish</span>
+        </button>
+      </div>
+    </div>
+    <div class="bs-stepper-content">
+      <div id="init" class="content" role="tabpanel" aria-labelledby="step-1">
+        <div class="step-container">
+          <div class="row my-5">
+            <div class="col-6 offset-3 text-center">
+              <select id="professors-identifier" class="selectpicker w-100" data-style="btn-primary" data-live-search="true"></select>
+            </div>
           </div>
         </div>
-        <div class="bs-stepper-content">
-          <div id="init" class="content" role="tabpanel" aria-labelledby="step-1"></div>
-          <div id="uploads" class="content" role="tabpanel" aria-labelledby="step-2"></div>
-          <div id="temporary" class="content" role="tabpanel" aria-labelledby="step-3"></div>
-          <div id="edit" class="content" role="tabpanel" aria-labelledby="step-4"></div>
-          <div id="finish" class="content" role="tabpanel" aria-labelledby="step-5"></div>
+        <div class="step-actions">
+          <div class="row">
+            <div class="col-5 text-right">
+              <button id='sb-1' type="button" class="btn btn-outline-primary btn-font bi bi-chevron-left" disabled></button>
+            </div>
+            <div class="col-5 offset-2">
+              <button id='sn-1' type="button" class="btn btn-outline-primary btn-font bi bi-chevron-right"></button>
+            </div>
+          </div>
         </div>
       </div>
+      <div id="uploads" class="content" role="tabpanel" aria-labelledby="step-2">
+        <div class="step-container">
+          <div class="row my-5">
+            <div class="col-2 offset-5">
+              <button id="btn-add-new-file" type="button" class="btn btn-primary w-100">Додати новий файл</button>
+            </div>
+          </div>
+          <div class="row w-100 m-0">
+            <ul id="file-list" class="list-group w-100"></ul>
+          </div>
+        </div>
+        <div class="step-actions">
+          <div class="row">
+            <div class="col-5 text-right">
+              <button id='sb-2' type="button" class="btn btn-outline-primary btn-font bi bi-chevron-left"></button>
+            </div>
+            <div class="col-5 offset-2">
+              <button id='sn-2' type="button" class="btn btn-outline-primary btn-font bi bi-chevron-right"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="edit" class="content" role="tabpanel" aria-labelledby="step-3">
+        <div class="step-container">
+          <h3>
+            Демонстрация резултатов с возможностью (редактировать?), удалить/добавить
+          </h3>
+        </div>
+        <div class="step-actions">
+          <div class="row">
+            <div class="col-5 text-right">
+              <button id='sb-3' type="button" class="btn btn-outline-primary btn-font bi bi-chevron-left"></button>
+            </div>
+            <div class="col-5 offset-2">
+              <button id='sn-3' type="button" class="btn btn-outline-primary btn-font bi bi-chevron-right"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="finish" class="content" role="tabpanel" aria-labelledby="step-4">
+        <div class="step-container">
+          <h3>
+            Финальный этап, составления регламента, загрузка сгенерированого .docx
+          </h3>
+        </div>
+        <div class="step-actions">
+          <div class="row">
+            <div class="col-5 text-right">
+              <button id='sb-4' type="button" class="btn btn-outline-primary btn-font bi bi-chevron-left"></button>
+            </div>
+            <div class="col-5 offset-2">
+              <button id='sn-4' type="button" class="btn btn-outline-primary btn-font bi bi-chevron-right" disabled></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
 <script src="./main.js"></script>
@@ -69,5 +144,7 @@
 <script src="../../../assets/bootstrap/jquery-3.5.1.slim.min.js"></script>
 <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="../../../assets/bootstrap/stepper/bs-stepper.min.js"></script>
+<script src="../../../assets/bootstrap/bootstrap-select.min.js"></script>
+<script src="../../../assets/snackbar/snackbar.min.js"></script>
 </body>
 </html>

@@ -9,3 +9,53 @@ main {
     height: 100vh;
     width: 100vw;
 }
+
+.step-container {
+    height: calc(100vh - 206px);
+    width: 100%;
+    padding-bottom: 50px;
+    padding-top: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.step-actions {
+    height: 80px;
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.btn-font {
+    font-size: 2.6rem;
+}
+
+#loader {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+
+    background: linear-gradient(45deg, rgba(8,29,122,0.8911939775910365) 0%, rgba(4,138,114,0.8883928571428571) 100%);
+}
+
+#loader > div {
+    z-index: 10;
+    color: #28a745;
+}
+
+.spinner-size {
+    width: 6.5rem;
+    height: 6.5rem;
+}
+
+.spinner-disabled {
+    position: relative!important;
+    width: 0!important;
+    height: 0!important;
+    margin-left: -220vw!important;
+}

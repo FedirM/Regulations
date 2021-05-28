@@ -1,5 +1,6 @@
 const {
     app,
+    dialog,
     ipcMain,
     BrowserWindow
 } = require("electron");
@@ -31,6 +32,15 @@ function createWindow() {
     mainWin.loadFile('./ui/main-window/home/index.html');
     mainWin.setMenuBarVisibility(false);
     mainWin.webContents.openDevTools();
+}
+
+function createDialogFilePicker() {
+    return dialog.showOpenDialogSync({
+        filters: [
+            { name: 'Розклад', extensions: ['xlsx'] }
+        ],
+        properties: ['openFile', 'multiSelections']
+    });
 }
 
 function createModalAddDegree() {
@@ -88,4 +98,22 @@ ipcMain.on('modal-window:confirm', (event, args) => {
 
 ipcMain.on('modal-window:cancel', (event, args) => {
     modalWin.close();
+});
+
+
+ipcMain.on('main-window:init-regulation', (event, args) => {
+    mainWin.webContents.send('main-window:on-regulation-init', db.getData());
+});
+
+ipcMain.on('main-window:open-file-picker', (event, args) => {
+    const list = createDialogFilePicker();
+    mainWin.webContents.send('main-window:file-picker-results', list);
+});
+
+ipcMain.on('main-window:process-files', (event, args) => {
+    console.log('Processing...\n');
+    args.forEach(el => console.log(el));
+    setTimeout(() => {
+        mainWin.webContents.send('main-window:process-files-results', {});
+    }, 3000);
 });
