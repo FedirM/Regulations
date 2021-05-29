@@ -9,6 +9,8 @@ const path = require('path');
 
 // Custom modules
 const db = require('./modules/db/.');
+const xlsx = require('./modules/xlsx-convertor/.');
+const parser = require('./modules/xlsx-parser/.');
 
 let mainWin, modalWin;
 
@@ -111,9 +113,11 @@ ipcMain.on('main-window:open-file-picker', (event, args) => {
 });
 
 ipcMain.on('main-window:process-files', (event, args) => {
-    console.log('Processing...\n');
-    args.forEach(el => console.log(el));
-    setTimeout(() => {
-        mainWin.webContents.send('main-window:process-files-results', {});
-    }, 3000);
+    xlsx(args).then( res => {
+        parser( res[0].data[0].matrix );
+        mainWin.webContents.send('main-window:process-files-results', {isError: false, result: res, errMessage: ''});
+    }).catch(err => {
+        console.log(err.message);
+        mainWin.webContents.send('main-window:process-files-results', {isError: true, result: null, errMessage: 'Виникли непердбачувані труднощі при опрацюванні файлів'});
+    });
 });

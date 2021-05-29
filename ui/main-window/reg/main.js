@@ -163,5 +163,9 @@ window.ipc.on('main-window:file-picker-results', (args) => {
 
 window.ipc.on('main-window:process-files-results', (args) => {
     document.getElementById('loader').classList.add('spinner-disabled');
-    console.log('RESULTS: ', args);
+    if( args.isError ){
+        showStatusSnackbar(args.errMessage, true);
+    } else {
+        console.log('Results: ', args.result);
+    }
 });
