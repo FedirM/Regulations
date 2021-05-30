@@ -102,10 +102,44 @@
         </div>
       </div>
       <div id="edit" class="content" role="tabpanel" aria-labelledby="step-3">
-        <div class="step-container">
-          <h3>
-            Демонстрация резултатов с возможностью (редактировать?), удалить/добавить
-          </h3>
+        <div class="step-container py-2 overflow-hidden">
+          <div class="table-header">
+            <div class="table-grid p-0">
+              <div class="table-row" style="border: none;">
+                <div class="row">
+                  <div class="col-1 h4 text-center lh">#</div>
+                  <div class="col-2 h4 text-center lh">Викладач</div>
+                  <div class="col-3 h4 text-center lh">ПІБ</div>
+                  <div class="col-2 h4 text-center lh">Посада</div>
+                  <div class="col-3 h4 text-center lh">Предмети</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-body">
+            <div id="professor-table-body" class="table-grid">
+              <div class="table-row">
+                <div id="prof-${p.p_id}" class="row">
+                  <div class="col-1 text-center lh">${p.p_id}</div>
+                  <div class="col-2 text-center lh pt-1">
+                    <input type="email" class="form-control" id="prof-alias-${p.p_id}" value="${p.p_alias}" />
+                  </div>
+                  <div class="col-3 text-center lh pt-1">
+                    <input type="email" class="form-control" id="prof-name-${p.p_id}" value="${p.p_name}" />
+                  </div>
+                  <div class="col-2 text-center lh">
+                    <select id="prof-degree-${p.p_id}" class="selectpicker" data-live-search="true"></select>
+                  </div>
+                  <div class="col-3 text-center pt-1">
+                    <button id="btn-prof-sub-${p.p_id}" class="btn btn-outline-primary px-5">Переглянути</button>
+                  </div>
+                  <div class="col-1 text-center pt-1">
+                    <button id="btn-delete-prof-${p.p_id}" class="btn btn-outline-danger bi bi-trash"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="step-actions">
           <div class="row">

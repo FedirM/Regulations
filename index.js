@@ -12,6 +12,10 @@ const db = require('./modules/db/.');
 const xlsx = require('./modules/xlsx-convertor/.');
 const parser = require('./modules/xlsx-parser/.');
 
+let regulationInfo = {
+    professor: null     // professor's id for whom building regulation
+};
+
 let mainWin, modalWin;
 
 function createWindow() {
@@ -107,6 +111,10 @@ ipcMain.on('main-window:init-regulation', (event, args) => {
     mainWin.webContents.send('main-window:on-regulation-init', db.getData());
 });
 
+ipcMain.on('main-window:change-curr-professor', (event, args) => {
+    regulationInfo.professor = db.getProfessor( args );
+});
+
 ipcMain.on('main-window:open-file-picker', (event, args) => {
     const list = createDialogFilePicker();
     mainWin.webContents.send('main-window:file-picker-results', list);
@@ -114,7 +122,12 @@ ipcMain.on('main-window:open-file-picker', (event, args) => {
 
 ipcMain.on('main-window:process-files', (event, args) => {
     xlsx(args).then( res => {
-        parser( res[0].data[0].matrix );
+        for(let file of res){
+            for(let sheet of file.data){
+                sheet.parsedInfo = parser( sheet.matrix, regulationInfo.professor );
+            }
+        }
+        
         mainWin.webContents.send('main-window:process-files-results', {isError: false, result: res, errMessage: ''});
     }).catch(err => {
         console.log(err.message);

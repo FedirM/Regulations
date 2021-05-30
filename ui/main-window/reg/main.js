@@ -2,11 +2,16 @@
 var db = null;
 var stepper = null;
 var fileList = [];
+var foundSubjects = [];
 
 document.addEventListener('DOMContentLoaded', initStepper);
 
 document.getElementById('back-btn').addEventListener('click', (event) => {
     window.ipc.send('main-window:open-home');
+});
+
+document.getElementById('professors-identifier').addEventListener('change', (event) => {
+    window.ipc.send('main-window:change-curr-professor', Number(event.target.value));
 });
 
 document.getElementById('btn-add-new-file').addEventListener('click', (event) => {
@@ -166,6 +171,11 @@ window.ipc.on('main-window:process-files-results', (args) => {
     if( args.isError ){
         showStatusSnackbar(args.errMessage, true);
     } else {
-        console.log('Results: ', args.result);
+        for(let file of args.result){
+            for(let sheet of file.data){
+                foundSubjects.push(...sheet.parsedInfo);
+            }
+        }
+        console.log('Results: ', foundSubjects);
     }
 });

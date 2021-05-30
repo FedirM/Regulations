@@ -59,3 +59,42 @@ main {
     height: 0!important;
     margin-left: -220vw!important;
 }
+
+
+/* Table */
+
+.table-header {
+    height: 50px;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.table-body {
+    height: calc(100% - 50px);
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.table-grid {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: baseline;
+    align-items: center;
+
+    padding-bottom: 350px;
+}
+
+.table-row {
+    flex: 0 0 50px;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.overflow-hidden {
+    overflow: hidden!important;
+}

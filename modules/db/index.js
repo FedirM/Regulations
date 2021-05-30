@@ -19,8 +19,14 @@ function setData( tmp ) {
     }
 }
 
+function getProfessor( id ) {
+    if( !id ) return {};
+    return JSON.parse(JSON.stringify(data.professor.find(el => { return el.p_id === id })));
+}
+
 
 module.exports = {
     getData,
-    setData
+    setData,
+    getProfessor
 }

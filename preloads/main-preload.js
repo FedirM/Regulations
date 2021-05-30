@@ -16,7 +16,8 @@ contextBridge.exposeInMainWorld(
                 'main-window:open-modal-add-degree',
                 'main-window:init-regulation',
                 'main-window:open-file-picker',
-                'main-window:process-files'
+                'main-window:process-files',
+                'main-window:change-curr-professor'
             ];
             if (validChannels.includes(channel)) {
                 ipcRenderer.send(channel, data);

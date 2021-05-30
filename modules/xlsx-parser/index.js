@@ -1,5 +1,4 @@
 
-const fs = require('fs');
 
 function searchGroupRow( matrix ) {
     for(let id = 0; id < matrix.length; id++){
@@ -7,6 +6,7 @@ function searchGroupRow( matrix ) {
             return id;
         }
     }
+    return null;
 }
 
 function searchSubGroupRow( matrix ) {
@@ -15,6 +15,7 @@ function searchSubGroupRow( matrix ) {
             return id;
         }
     }
+    return null;
 }
 
 function searchWeekInfo( matrix ) {
@@ -26,7 +27,7 @@ function searchWeekInfo( matrix ) {
     let isWeekTypeFound = false;
 
     let res = {
-        weedDayColumn: null,
+        weekDayColumn: null,
         lectionIndexColumn: null,
         weekTypeCoulumn: null // Числ. Знам. в расписании
     };
@@ -37,7 +38,7 @@ function searchWeekInfo( matrix ) {
             if( !isDayFound ) {
                 for(let re of weekRegxp) {
                     if( String(row[cid]).match(re) ){
-                        res.weedDayColumn = cid;
+                        res.weekDayColumn = cid;
                         isDayFound = true;
                     }
                 }
@@ -59,28 +60,84 @@ function searchWeekInfo( matrix ) {
             }
         }
     }
+    return null;
+}
+
+function chomp( str ) {
+    return str.replace(/^[\s,;:|\/]+/g, '').replace(/[\s,;:|\/]+$/g, '');
 }
 
 
-
-module.exports = function ( matrix ) {
+module.exports = function ( matrix, professor ) {
 
     const state = {
         isGoupDetected: false,
         isSubGroupDetected: false,
-        isScheduleInfoDetected: false
+        isScheduleDayDetected: false,
+        isScheduleLectionDetected: false,
+        isScheduleWeekTypeDetected: false
     };
     
     const position = {
         group: null,
         subGroup: null,
-        week: []
+        week: null
     };
     //week[0-6]   - 0: Monday ... 6: Sunday
     //    .start  - start row into matrix
     //    .end    - last row of the day into matrix
 
-    console.log('GROUP ID: ', searchGroupRow(matrix));
-    console.log('SUBGROUP ID: ', searchSubGroupRow(matrix));
-    console.log('Week info: ', JSON.stringify(searchWeekInfo(matrix)));
+    position.group = searchGroupRow(matrix);
+    position.subGroup = searchSubGroupRow(matrix);
+    position.week = searchWeekInfo(matrix);
+
+    let startRow = 0, startColumn = 0;
+
+    if(position.group) {
+        state.isGoupDetected = true;
+        startRow = position.group + 1;
+    }
+    if(position.subGroup) {
+        state.isSubGroupDetected = true;
+        startRow = position.subGroup + 1;
+    }
+    if(position.week.weekDayColumn) {
+        state.isScheduleDayDetected = true;
+        startColumn = position.week.weekDayColumn + 1;
+    }
+    if(position.week.lectionIndexColumn && position.week.lectionIndexColumn >= startColumn){
+        state.isScheduleLectionDetected = true;
+        startColumn = position.week.lectionIndexColumn + 1;
+    }
+    if(position.week.weekTypeCoulumn && position.week.weekTypeCoulumn >= startColumn){
+        state.isScheduleWeekTypeDetected = true;
+        startColumn = position.week.weekTypeCoulumn + 1;
+    }
+
+    console.log('POS INFO: ', JSON.stringify(position, '\n', 2));
+    console.log(`Start row: ${startRow}\nStart column: ${startColumn}`);
+
+    let pattern = `(${professor.p_alias.replace(/\s+/g, '\\s{0,}').replace(/\./g, '\\.?')})|(${professor.p_name.replace(/\s+/g, '\\s{0,}')})`;
+    const pRE = new RegExp(pattern, 'i');
+
+    let results = [];
+
+    for(let i = startRow; i < matrix.length; i++){
+        for(let j = startColumn; j < matrix[i].length; j++){
+            if( matrix[i][j] && matrix[i][j].match(pRE) ){
+                results.push({
+                    weekDay: (state.isScheduleDayDetected) ? matrix[i][position.week.weekDayColumn] : null,
+                    lectionIndex: (state.isScheduleLectionDetected) ? matrix[i][position.week.lectionIndexColumn] : null,
+                    weekType: (state.isScheduleWeekTypeDetected) ? chomp(matrix[i][position.week.weekTypeCoulumn]) : null,
+                    group: (state.isGoupDetected) ? chomp(matrix[position.group][j]) : null,
+                    subGroup: (state.isSubGroupDetected) ? chomp(matrix[position.subGroup][j]) : null,
+                    subject: chomp(matrix[i][j].replace(pRE, '').replace(/\d+\/\d+/, '').replace(/(\(\s{0,}лк\s{0,}\.?\s{0,}\))|(\(\s{0,}лб\s{0,}\.?\s{0,}\))|(\(\s{0,}пр\s{0,}\.?\s{0,}\))/i, '')),
+                    lectureHall: ( matrix[i][j].match(/\d+\/\d+/) ) ? matrix[i][j].match(/\d+\/\d+/)[0] : null,
+                    lectureType: ( matrix[i][j].match(/(\(\s{0,}лк\s{0,}\.?\s{0,}\))|(\(\s{0,}лб\s{0,}\.?\s{0,}\))|(\(\s{0,}пр\s{0,}\.?\s{0,}\))/i) ) ? matrix[i][j].match(/(\(\s{0,}лк\s{0,}\.?\s{0,}\))|(\(\s{0,}лб\s{0,}\.?\s{0,}\))|(\(\s{0,}пр\s{0,}\.?\s{0,}\))/i)[0] : null,
+                });
+            }
+        }
+    }
+
+    return JSON.parse(JSON.stringify(results));
 }
