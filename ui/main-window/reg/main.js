@@ -150,6 +150,47 @@ function deleteFileFromList( id ) {
     processFileList();
 }
 
+
+function initParsedResultTable() {
+    const tableHTML = document.getElementById('parsed-table-body');
+    tableHTML.innerHTML = '';
+    for(let indx = 0; indx < foundSubjects.length; indx++ ){
+        tableHTML.insertAdjacentHTML('beforeend',
+        `<div class="table-row">
+            <div class="row">
+                <div class="col-1 text-center pt-1">
+                    <input type="text" class="form-control" id="day-${indx}" value="${foundSubjects[indx].weekDay}" />
+                </div>
+                <div class="col-1 text-center">
+                    <input type="text" class="form-control" id="wt-${indx}" value="${foundSubjects[indx].weekType}" />
+                </div>
+                <div class="col-1 text-center">
+                    <input type="text" class="form-control" id="li-${indx}" value="${foundSubjects[indx].lectureIndex}" />
+                </div>
+                <div class="col-4 text-center pt-1">
+                    <input type="text" class="form-control" id="subject-${indx}" value="${foundSubjects[indx].subject}" />
+                </div>
+                <div class="col-1 text-center pt-1">
+                    <input type="text" class="form-control" id="stype-${indx}" value="${foundSubjects[indx].lectureType}" />
+                </div>
+                <div class="col-1 text-center pt-1">
+                    <input type="text" class="form-control" id="group-${indx}" value="${foundSubjects[indx].group}" />
+                </div>
+                <div class="col-1 text-center pt-1">
+                    <input type="text" class="form-control" id="subgroup-${indx}" value="${foundSubjects[indx].subGroup}" />
+                </div>
+                <div class="col-1 text-center pt-1">
+                    <input type="text" class="form-control" id="lhall-${indx}" value="${foundSubjects[indx].lectureHall}" />
+                </div>
+                <div class="col-1 text-center pt-1">
+                    <button id="btn-delete-parsed-${indx}" class="btn btn-outline-danger bi bi-trash"></button>
+                </div>
+            </div>
+        </div>`
+        );
+    }
+}
+
 // IPC
 
 window.ipc.send('main-window:init-regulation');
@@ -177,5 +218,6 @@ window.ipc.on('main-window:process-files-results', (args) => {
             }
         }
         console.log('Results: ', foundSubjects);
+        initParsedResultTable();
     }
 });

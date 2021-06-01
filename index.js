@@ -127,7 +127,6 @@ ipcMain.on('main-window:process-files', (event, args) => {
                 sheet.parsedInfo = parser( sheet.matrix, regulationInfo.professor );
             }
         }
-        
         mainWin.webContents.send('main-window:process-files-results', {isError: false, result: res, errMessage: ''});
     }).catch(err => {
         console.log(err.message);

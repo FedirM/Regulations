@@ -23,12 +23,12 @@ function searchWeekInfo( matrix ) {
     const weekRegxp = weekPatterns.map(str => { return new RegExp(str, 'gi') });
 
     let isDayFound = false;
-    let isLectionFound = false;
+    let isLectureFound = false;
     let isWeekTypeFound = false;
 
     let res = {
         weekDayColumn: null,
-        lectionIndexColumn: null,
+        lectureIndexColumn: null,
         weekTypeCoulumn: null // Числ. Знам. в расписании
     };
     
@@ -43,10 +43,10 @@ function searchWeekInfo( matrix ) {
                     }
                 }
             }
-            if( isDayFound && !isLectionFound ){
+            if( isDayFound && !isLectureFound ){
                 if( Number.isInteger(row[cid]) ){
-                    res.lectionIndexColumn = cid;
-                    isLectionFound = true;
+                    res.lectureIndexColumn = cid;
+                    isLectureFound = true;
                 }
             }
             if( isDayFound && !isWeekTypeFound ){
@@ -74,7 +74,7 @@ module.exports = function ( matrix, professor ) {
         isGoupDetected: false,
         isSubGroupDetected: false,
         isScheduleDayDetected: false,
-        isScheduleLectionDetected: false,
+        isScheduleLectureDetected: false,
         isScheduleWeekTypeDetected: false
     };
     
@@ -105,9 +105,9 @@ module.exports = function ( matrix, professor ) {
         state.isScheduleDayDetected = true;
         startColumn = position.week.weekDayColumn + 1;
     }
-    if(position.week.lectionIndexColumn && position.week.lectionIndexColumn >= startColumn){
-        state.isScheduleLectionDetected = true;
-        startColumn = position.week.lectionIndexColumn + 1;
+    if(position.week.lectureIndexColumn && position.week.lectureIndexColumn >= startColumn){
+        state.isScheduleLectureDetected = true;
+        startColumn = position.week.lectureIndexColumn + 1;
     }
     if(position.week.weekTypeCoulumn && position.week.weekTypeCoulumn >= startColumn){
         state.isScheduleWeekTypeDetected = true;
@@ -127,7 +127,7 @@ module.exports = function ( matrix, professor ) {
             if( matrix[i][j] && matrix[i][j].match(pRE) ){
                 results.push({
                     weekDay: (state.isScheduleDayDetected) ? matrix[i][position.week.weekDayColumn] : null,
-                    lectionIndex: (state.isScheduleLectionDetected) ? matrix[i][position.week.lectionIndexColumn] : null,
+                    lectureIndex: (state.isScheduleLectureDetected) ? matrix[i][position.week.lectureIndexColumn] : null,
                     weekType: (state.isScheduleWeekTypeDetected) ? chomp(matrix[i][position.week.weekTypeCoulumn]) : null,
                     group: (state.isGoupDetected) ? chomp(matrix[position.group][j]) : null,
                     subGroup: (state.isSubGroupDetected) ? chomp(matrix[position.subGroup][j]) : null,
