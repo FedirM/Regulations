@@ -19,7 +19,7 @@ function searchSubGroupRow( matrix ) {
 }
 
 function searchWeekInfo( matrix ) {
-    const weekPatterns = ['понеділок', 'вівторок', 'середа', 'четверг', 'п.?ятниця', 'субота', 'неділя'];
+    const weekPatterns = ['понеділок', 'вівторок', 'середа', 'четверг', 'п\s{0,}.?\s{0,}ятниця', 'субота', 'неділя'];
     const weekRegxp = weekPatterns.map(str => { return new RegExp(str, 'gi') });
 
     let isDayFound = false;

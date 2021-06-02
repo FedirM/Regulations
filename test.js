@@ -143,6 +143,16 @@ const rData = [
         subject: "Компьютерне моделювання систем та процесів  до 12.11",
         lectureHall: "3/61",
         lectureType: "(пр.)"
+    },
+    {
+        weekDay: "Вівторок",
+        lectureIndex: 2,
+        weekType: "Знам.",
+        group: "ПА-18у-2",
+        subGroup: "2 підгрупа",
+        subject: "Компьютерне моделювання систем та процесів  до 12.11",
+        lectureHall: "3/62",
+        lectureType: "(пр.)"
     }
 ];
 

@@ -2,7 +2,8 @@
 const fs = require('fs');
 
 
-let data = require('./data.json');
+let data            = require('./data.json');
+let schedule_info   = require('./schedule.json');
 
 function getData() {
     return JSON.parse(JSON.stringify(data));
@@ -25,8 +26,16 @@ function getProfessor( id ) {
 }
 
 
+// Schedule
+
+function getScheduleInfo() {
+    return JSON.parse(JSON.stringify(schedule_info));
+}
+
+
 module.exports = {
     getData,
     setData,
-    getProfessor
+    getProfessor,
+    getScheduleInfo
 }
